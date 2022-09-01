@@ -16,6 +16,18 @@ void ordenar(contrato array[], int n);
 void noDuplicar(contrato vector[], int n);
 int main()
 {
+    contrato contrato9;
+    contrato9.Contrato = 22;
+    contrato9.Dia = 6;
+    contrato9.Mes = 5;
+    contrato9.Year = 2022;
+    
+    contrato contrato0;
+    contrato0.Contrato = 12;
+    contrato0.Dia = 2;
+    contrato0.Mes = 5;
+    contrato0.Year = 2022;
+
     contrato contrato1;
     contrato1.Contrato = 1;
     contrato1.Dia = 2;
@@ -46,17 +58,17 @@ int main()
     contrato5.Mes = 6;
     contrato5.Year = 2023;
 
-    contrato contratos[50] = {contrato4, contrato2, contrato5, contrato1, contrato3};
+    contrato contratos[50] = {contrato4,contrato9, contrato2, contrato5, contrato1, contrato3, contrato0};
 
-    cout<< "Lista original:"<<endl;
+    cout << "Lista original:" << endl;
     mostrar(contratos, 50);
-    ordenar(contratos,50);
-    cout<< "\nLista Ordenada: "<< endl;
-    mostrar(contratos,50);
-    cout<< "\nLista Ordenada Desendente: "<< endl;
-    mostrarDescendente(contratos,50);
-    cout<< "\nLista No duplicada: "<< endl;
-    noDuplicar(contratos,50);
+    ordenar(contratos, 50);
+    cout << "\nLista Ordenada: " << endl;
+    mostrar(contratos, 50);
+    cout << "\nLista Ordenada Desendente: " << endl;
+    mostrarDescendente(contratos, 50);
+    cout << "\nLista No duplicada: " << endl;
+    noDuplicar(contratos, 50);
     return 0;
 }
 void ordenar(contrato array[], int n)
@@ -66,11 +78,29 @@ void ordenar(contrato array[], int n)
     {
         for (j = i + 1; j < n; j++)
         {
-            int valor1 = array[i].Year;
-            int valor2 = array[j].Year;
-            if (valor1 > valor2)
+            //
+            int valorYear1 = array[i].Year;
+            int valorYear2 = array[j].Year;
+            if (valorYear1 > valorYear2)
             {
                 intercambio(array[i], array[j]);
+            }
+            else if (valorYear1 == valorYear2)
+            {
+                int valorMes1 = array[i].Mes;
+                int valorMes2 = array[j].Mes;
+                if (valorMes1 > valorMes2)
+                {
+                    intercambio(array[i], array[j]);
+                }
+                else if (valorMes1 == valorMes2)
+                {
+                    int valorDia1 = array[i].Dia;
+                    int valorDia2 = array[j].Dia;
+                    if(valorDia1>valorDia2){
+                        intercambio(array[i], array[j]);
+                    }
+                }
             }
         }
     }
@@ -92,10 +122,10 @@ void mostrar(contrato array[], int n)
         }
     }
 }
-void mostrarDescendente(contrato array[], int n)
+void mostrarDescendente(contrato array[], int n) // Muestra invertida el array
 {
     int contador = 0;
-    for (int i = n-1; i >= 0; i--)
+    for (int i = n - 1; i >= 0; i--)
     {
         if (array[i].Contrato > 0)
         {
@@ -104,11 +134,11 @@ void mostrarDescendente(contrato array[], int n)
     }
 }
 
-bool contieneContrato(contrato vector[], int search,int n)//busca en un array, un valor especifico
+bool contieneContrato(contrato vector[], int search, int n) // busca en un array, un valor especifico
 {
     for (int i = 0; i < n; i++)
     {
-        if (vector[i].Contrato == search)
+        if (vector[i].Contrato == search) // Si el valor que se busca ya existe previamente entonces retorna un true
         {
             return true;
         }
@@ -116,7 +146,7 @@ bool contieneContrato(contrato vector[], int search,int n)//busca en un array, u
     return false;
 }
 
-void noDuplicar(contrato vector[], int n)//metodo para mostrar los datos no duplicados
+void noDuplicar(contrato vector[], int n) // metodo para mostrar los datos no duplicados
 {
     int i = 0;
     int j = 1;
@@ -131,10 +161,10 @@ void noDuplicar(contrato vector[], int n)//metodo para mostrar los datos no dupl
             contador++;
         }
     }
-    contrato vectorNuevo[contador] = {};
+    contrato vectorNuevo[contador] = {}; // Nuevo array que no contiene datos repetidos
     for (int i = 0; i < contador; i++)
     {
         vectorNuevo[i] = vectorTmp[i];
     }
-    mostrar(vectorNuevo,contador);
+    mostrar(vectorNuevo, contador);
 }
