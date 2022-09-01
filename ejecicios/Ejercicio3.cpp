@@ -11,8 +11,9 @@ struct contrato
 
 void intercambio(contrato &a, contrato &b);
 void mostrar(contrato array[], int n);
+void mostrarDescendente(contrato array[], int n);
 void ordenar(contrato array[], int n);
-
+void noDuplicar(contrato vector[], int n);
 int main()
 {
     contrato contrato1;
@@ -39,13 +40,23 @@ int main()
     contrato4.Mes = 7;
     contrato4.Year = 2021;
 
-    contrato contratos[50] = {contrato4, contrato2, contrato1, contrato3};
+    contrato contrato5;
+    contrato5.Contrato = 4;
+    contrato5.Dia = 4;
+    contrato5.Mes = 6;
+    contrato5.Year = 2023;
+
+    contrato contratos[50] = {contrato4, contrato2, contrato5, contrato1, contrato3};
 
     cout<< "Lista original:"<<endl;
     mostrar(contratos, 50);
     ordenar(contratos,50);
     cout<< "\nLista Ordenada: "<< endl;
     mostrar(contratos,50);
+    cout<< "\nLista Ordenada Desendente: "<< endl;
+    mostrarDescendente(contratos,50);
+    cout<< "\nLista No duplicada: "<< endl;
+    noDuplicar(contratos,50);
     return 0;
 }
 void ordenar(contrato array[], int n)
@@ -80,4 +91,50 @@ void mostrar(contrato array[], int n)
             cout << "fecha:" << array[i].Dia << "/" << array[i].Mes << "/" << array[i].Year << " Contrato: " << array[i].Contrato << endl;
         }
     }
+}
+void mostrarDescendente(contrato array[], int n)
+{
+    int contador = 0;
+    for (int i = n-1; i >= 0; i--)
+    {
+        if (array[i].Contrato > 0)
+        {
+            cout << "fecha:" << array[i].Dia << "/" << array[i].Mes << "/" << array[i].Year << " Contrato: " << array[i].Contrato << endl;
+        }
+    }
+}
+
+bool contieneContrato(contrato vector[], int search,int n)//busca en un array, un valor especifico
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (vector[i].Contrato == search)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void noDuplicar(contrato vector[], int n)//metodo para mostrar los datos no duplicados
+{
+    int i = 0;
+    int j = 1;
+    int contador = 0;
+    contrato vectorTmp[n] = {};
+    for (int i = 0; i < n; i++)
+    {
+        contrato a = vector[i];
+        if (contieneContrato(vectorTmp, a.Contrato, n) == false)
+        {
+            vectorTmp[contador] = a;
+            contador++;
+        }
+    }
+    contrato vectorNuevo[contador] = {};
+    for (int i = 0; i < contador; i++)
+    {
+        vectorNuevo[i] = vectorTmp[i];
+    }
+    mostrar(vectorNuevo,contador);
 }
