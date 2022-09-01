@@ -11,6 +11,7 @@ int main()
     Seleccion(nombres, 10);
     cout<<"\nLista Ordenada:"<<endl;
     mostrar(nombres, 10);
+    return 0;
 }
 void Seleccion(string array[], int count)
 {
