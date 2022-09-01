@@ -21,6 +21,12 @@ int main()
     contrato9.Dia = 6;
     contrato9.Mes = 5;
     contrato9.Year = 2022;
+
+    contrato contrato6;
+    contrato6.Contrato = 1213;
+    contrato6.Dia = 6;
+    contrato6.Mes = 5;
+    contrato6.Year = 2022;
     
     contrato contrato0;
     contrato0.Contrato = 12;
@@ -58,7 +64,7 @@ int main()
     contrato5.Mes = 6;
     contrato5.Year = 2023;
 
-    contrato contratos[50] = {contrato4,contrato9, contrato2, contrato5, contrato1, contrato3, contrato0};
+    contrato contratos[50] = {contrato4,contrato9,contrato6, contrato2, contrato5, contrato1, contrato3, contrato0};
 
     cout << "Lista original:" << endl;
     mostrar(contratos, 50);
